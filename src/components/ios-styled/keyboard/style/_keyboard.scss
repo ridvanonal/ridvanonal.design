@@ -1,0 +1,144 @@
+@use "sass:math";
+
+$keyboard-padding:0.25rem;
+$keyboard-key-gap:0.375rem;
+$keyboard-row-gap:0.375rem;
+$keyboard-border-radius:0.5rem;
+$keyboard-key-height:2.25rem;
+$keyboard-key-width:1.5rem;
+$keyboard-custom-key-action-big-width:math.div(5*$keyboard-key-width,2) + 2*$keyboard-key-gap - math.div($keyboard-key-gap,2);
+$keyboard-custom-key-action-small-width:math.div($keyboard-custom-key-action-big-width - $keyboard-key-gap,2);
+$keyboard-touch-width: 1.75*$keyboard-key-width;
+$keyboard-touch-border-radius:0.5rem;
+
+.keyboard{
+    --keyboard-background:rgb(209,211,218);
+    --keyboard-action-key-background:rgb(170,176,187);
+    --keyboard-key-background:rgb(var(--white));
+    --keyboard-key-color:rgb(var(--black));
+    --keyboard-key-shadow-color:rgb(136,137,141);
+    --keyboard-key-touch-shadow-color:rgba(136,137,141,0.75);
+    --keyboard-action-key-active-background:rgb(var(--white));
+    --keyboard-action-key-active-color:rgb(var(--black));
+    --keyboard-space-key-active-background:rgb(170,176,187);
+
+    html[data-theme="dark"] & {
+        --keyboard-background:rgb(43,43,43);
+        --keyboard-action-key-background:rgb(70,70,70);
+        --keyboard-key-background:rgb(107,107,107);
+        --keyboard-key-color:rgb(var(--white));
+        --keyboard-key-shadow-color:rgb(var(--gray-6));
+        --keyboard-key-touch-shadow-color:rgba(var(--gray-6),0.75);
+        --keyboard-space-key-active-background:rgba(70,70,70,0.5);
+    }
+
+    padding: $keyboard-padding;
+    background-color: var(--keyboard-background);
+    display: flex;
+    flex-direction: column;
+    gap: $keyboard-row-gap;
+    border-radius: $keyboard-border-radius;
+    user-select: none;
+
+    & > .keyboard-row{
+        display: flex;
+        justify-content: center;
+        gap: $keyboard-key-gap;
+
+        & > .key{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: $keyboard-key-height;
+            cursor: pointer;
+            width: $keyboard-key-width;
+            background-color: var(--keyboard-key-background);
+            color: var(--keyboard-key-color);
+            font-size: 0.875rem;
+            font-weight: 600;
+            border-radius: $keyboard-border-radius - $keyboard-padding;
+            box-shadow: 0px 0px 0px var(--keyboard-key-shadow-color);
+
+            &.extended{
+                width: $keyboard-custom-key-action-small-width;
+            }
+
+            &.left{
+                margin-right: auto;
+            }
+
+            &.right{
+                margin-left: auto;
+            }
+
+            &.action{
+                background-color: var(--keyboard-action-key-background);
+
+                &:active.press-reaction{
+                    background-color: var(--keyboard-key-background);
+                }
+
+                &.active{
+                    color: var(--keyboard-action-key-active-color);
+                    background-color: var(--keyboard-action-key-active-background);
+                }
+
+                &:active.press-reaction-active{
+                    background-color: var(--keyboard-key-background);
+                }
+
+                & > svg {
+                    width: 60%;
+                    & > path{
+                        fill: currentColor;
+                    }
+                }
+
+                &.small{
+                    width: $keyboard-custom-key-action-small-width;
+                }
+
+                &.big{
+                    width: $keyboard-custom-key-action-big-width;
+                }
+            }
+
+            &.primary{
+                background-color: rgb(var(--blue));
+                color: rgb(var(--white));
+                &:active.press-reaction-active{
+                    color:var(--keyboard-key-color)
+                }
+            }
+
+            &.space{
+                width: 5*$keyboard-key-width + 4*$keyboard-key-gap;
+
+                &:active {
+                    background-color: var(--keyboard-space-key-active-background);
+                }
+            }
+
+            &.space,
+            &.action{
+                font-size: 0.75rem;
+                font-weight: normal;
+            }
+
+            & > .touch{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                height: 110%;
+                font-size: 1.25rem;
+                width: $keyboard-touch-width;
+                background-color: var(--keyboard-key-background);
+                box-shadow: 0px 2px 10px var(--keyboard-key-touch-shadow-color);
+                border-radius: $keyboard-touch-border-radius;
+                top:-115%;
+            }
+        }
+    }
+}

@@ -1,0 +1,72 @@
+@use "sass:math";
+
+$storage-box-padding:0.5rem;
+$storage-box-border-radius:0.5rem;
+$storage-box-max-width:400px;
+$storage-box-min-width:400px;
+$storage-box-bar-border-radius:0.25rem;
+$storage-box-bar-height:1rem;
+$storage-box-category-dot-size:0.5rem;
+
+.storage-box{
+    width: 100%;
+    background-color: rgb(var(--surface));
+    color: rgb(var(--on-surface));
+    padding: $storage-box-padding;
+    border-radius: $storage-box-border-radius;
+    max-width: $storage-box-max-width;
+    min-width: $storage-box-min-width;
+
+    & > .storage-box-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        align-items: center;
+        padding: 0 math.div($storage-box-padding,2) 0 math.div($storage-box-padding,2);
+
+        & > .storage-box-info-usage{
+            font-size: 0.75rem;
+            color: rgb(var(--gray-1));
+        }
+    }
+
+    & > .storage-box-bar {
+        height: $storage-box-bar-height;
+        background-color: rgb(var(--bg));
+        border-radius: $storage-box-bar-border-radius;
+        display: flex;
+        overflow: hidden;
+        margin-top: $storage-box-padding;
+
+        & > .storage-box-bar-part{
+            background-color: rgb(var(--color));
+            width: var(--width);
+            height: 100%;
+
+            &:not(:last-child) {
+                border-right: 1px solid rgb(var(--surface));
+            }
+        }
+    }
+
+    & > .storage-box-categories {
+        display: flex;
+        padding: $storage-box-padding math.div($storage-box-padding,2) 0 math.div($storage-box-padding,2);
+        gap: $storage-box-padding;
+        font-size: 0.75rem;
+
+        & > .storage-box-category {
+            display: flex;
+            align-items: center;
+
+            & > .storage-box-category-dot{
+                display: block;
+                height: $storage-box-category-dot-size;
+                width: $storage-box-category-dot-size;
+                border-radius: 100%;
+                background-color: rgb(var(--color));
+                margin-right: math.div($storage-box-padding,1.5);
+            }
+        }
+    }
+}
