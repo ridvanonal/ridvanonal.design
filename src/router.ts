@@ -32,6 +32,16 @@ export const router = createRouter({
                 palette:'ios'
             }
         },
+        {
+            name:'Test',
+            path:'/test',
+            component:()=>import('./views/TestView.vue'),
+            meta:{
+                saveAsClass:'keyboard',
+                index:3,
+                palette:'ios'
+            }
+        },
     ]
 })
 
