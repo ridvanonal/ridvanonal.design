@@ -2,7 +2,7 @@
     <main class="layout" :class="{'is-fullscreen':layoutStore.fullscreen}">
         <Navigation v-if="!layoutStore.fullscreen"></Navigation>
         <Actions v-if="!layoutStore.fullscreen"></Actions>
-        <section class="content" :class="$route.meta.backgroundClass">
+        <section class="content" :class="layoutStore.backgroundClass ? layoutStore.backgroundClass : $route.meta.backgroundClass">
             <RouterView></RouterView>
         </section>
     </main>

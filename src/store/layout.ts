@@ -9,6 +9,9 @@ export const useLayoutStore = defineStore('layout',()=>{
     }
     const setTheme = () => document.documentElement.dataset.theme = theme.value
 
+    const backgroundClass = ref<string|null>(null)
+    const setBackgroundClass = (cls:string|null) =>  backgroundClass.value = cls
+
     const fullscreen = ref<boolean>(false)
     const setFullscreen = (value:boolean) => fullscreen.value = value
 
@@ -17,6 +20,8 @@ export const useLayoutStore = defineStore('layout',()=>{
         toggleTheme,
         setTheme,
         fullscreen,
-        setFullscreen
+        setFullscreen,
+        backgroundClass,
+        setBackgroundClass
     }
 })

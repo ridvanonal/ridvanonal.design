@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import 'palette';
 
+
 body{
     height: 100vh;
     width:100vw;
@@ -80,16 +81,33 @@ body{
 
 .content{
     height: 100%;
+    width: 100%;
     grid-area: content;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    [data-palette="ios"] &.ios-16{
+    html[data-palette="ios"] &.ios-16{
         background-image: url("./images/ios16-bg-light.png");
-        html[data-theme="dark"] &{
-            background-image: url("./images/ios16-bg-dark.png");
-        }
+        background-size: cover;
     }
 
+    html[data-palette="ios"][data-theme="dark"] &.ios-16{
+        background-image: url("./images/ios16-bg-dark.png");
+    }
+
+    html[data-palette="ios"] &.ios-17{
+        background-image: url("./images/ios17-bg-light.png");
+        background-size: cover;
+    }
+
+    html[data-palette="ios"][data-theme="dark"] &.ios-17{
+        background-image: url("./images/ios17-bg-dark.png");
+    }
+
+    &.ratio-9-16{
+        aspect-ratio: 9/16;
+        width: auto;
+        margin: auto;
+    }
 }

@@ -20,7 +20,10 @@ onMounted(()=>{
         if(e.code == 'KeyS') useRouteDownload(route)
     })
     document.addEventListener('keydown',(e:KeyboardEvent)=>{
-        if(e.code == 'KeyE') layoutStore.setFullscreen(false)
+        if(e.code == 'KeyF') layoutStore.fullscreen ? layoutStore.setFullscreen(false) : layoutStore.setFullscreen(true)
+    })
+    document.addEventListener('keydown',(e:KeyboardEvent)=>{
+        if(e.code == 'KeyT') layoutStore.toggleTheme()
     })
 
 

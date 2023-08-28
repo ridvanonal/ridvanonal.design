@@ -1,4 +1,13 @@
-export const useAverageColor = (image:HTMLImageElement|null|undefined,callback:(rgb:{r:number,g:number,b:number})=>void) => {
+export interface IAverageColor{
+    r:number,
+    g:number,
+    b:number,
+    rgb:string
+}
+
+const toRGB = (rgb:{r:number,g:number,b:number}) => `rgb(${rgb.r},${rgb.g},${rgb.b})`
+
+export const useAverageColor = (image:HTMLImageElement|null|undefined,callback:(rgb:IAverageColor)=>void) => {
     const blockSize:number = 5
     const defaultRGB = {r:0,g:0,b:0}
     const canvas:HTMLCanvasElement = document.createElement('canvas')
@@ -21,7 +30,7 @@ export const useAverageColor = (image:HTMLImageElement|null|undefined,callback:(
             try{
                 data = context.getImageData(0,0,width,height)
             } catch (e){
-                callback(defaultRGB)
+                callback({...defaultRGB,rgb:toRGB(defaultRGB)})
             }
 
             length = data.data.length
@@ -37,9 +46,8 @@ export const useAverageColor = (image:HTMLImageElement|null|undefined,callback:(
             rgb.g = ~~(rgb.g/count)
             rgb.b = ~~(rgb.b/count)
 
-            callback(rgb)
+            callback({...rgb,rgb:toRGB(rgb)})
         }
-        image.onerror = () => callback(defaultRGB)
-    }else callback(defaultRGB)
-    
+        image.onerror = () => callback({...defaultRGB,rgb:toRGB(defaultRGB)})
+    }else callback({...defaultRGB,rgb:toRGB(defaultRGB)})
 }

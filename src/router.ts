@@ -13,7 +13,7 @@ export const router = createRouter({
             }
         },
         {
-            name:'Storage Box',
+            name:'iOS Styled Storage Box',
             path:'/storage-box',
             component:()=>import('./views/ios-styled/StorageBoxView.vue'),
             meta:{
@@ -23,11 +23,22 @@ export const router = createRouter({
             }
         },
         {
-            name:'Keyboard',
+            name:'iOS Styled Keyboard',
             path:'/ios-styled/keyboard',
             component:()=>import('./views/ios-styled/KeyboardView.vue'),
             meta:{
                 saveAsClass:'keyboard',
+                index:2,
+                palette:'ios'
+            }
+        },
+        {
+            name:'iOS Styled Lock Screen Music Player',
+            path:'/ios-styled/lock-screen-music-player',
+            component:()=>import('./views/ios-styled/LockScreenMusicPlayerView.vue'),
+            meta:{
+                saveAsClass:'lock-screen-music-player',
+                backgroundClass:['ios-17'],
                 index:2,
                 palette:'ios'
             }

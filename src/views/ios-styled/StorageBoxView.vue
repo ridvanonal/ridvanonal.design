@@ -4,7 +4,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { IStorageBoxCategory } from '../../components/storage-box/model/storage-box-category.interface'
+import { IStorageBoxCategory } from '../../components/ios-styled/storage-box/model/storage-box-category.interface'
 import StorageBox from '../../components/ios-styled/storage-box/StorageBox.vue'
 
 const datas = ref<IStorageBoxCategory[]>([
