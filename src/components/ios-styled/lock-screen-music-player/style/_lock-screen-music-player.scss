@@ -14,7 +14,7 @@ $lock-screen-music-player-center-padding-y:$lock-screen-scale-factor * 0.5rem;
 $lock-screen-music-player-wave-size:$lock-screen-scale-factor * 2px;
 $lock-screen-music-player-wave-gap:$lock-screen-scale-factor * 0.125rem;
 $lock-screen-music-player-waves-width: calc(6*$lock-screen-music-player-wave-size + 5*$lock-screen-music-player-wave-gap);
-$lock-screen-music-player-big-image-border-radius:$lock-screen-scale-factor * 0.5rem;
+$lock-screen-music-player-big-image-border-radius:$lock-screen-scale-factor * 0.625rem;
 $lock-screen-music-player-bottom-button-padding:$lock-screen-scale-factor * 0.25rem;
 $lock-screen-music-player-big-image-margin-bottom: $lock-screen-scale-factor * 1.5rem;
 $lock-screen-music-player-wrapper-padding-bottom:25%;
@@ -51,6 +51,7 @@ $lock-screen-music-player-wrapper-padding-y:5%;
         transform: translateZ(0);
         object-fit: contain;
         opacity: 0.75;
+        top: 0;
 
         html[data-theme="dark"] &{
             filter: blur(3rem) brightness(50%);
@@ -119,7 +120,7 @@ $lock-screen-music-player-wrapper-padding-y:5%;
                 }
     
                 &:not(:empty) {
-                    box-shadow: 0px 2px 10px rgb(var(--black),0.25);
+                    box-shadow: 0px 2px 15px -5px rgb(var(--black),0.5);
                 }
             }
 
