@@ -1,20 +1,25 @@
+import Color from "color";
+import { onColor } from "./use-color";
+
 export interface IAverageColor{
-    r:number,
-    g:number,
-    b:number,
-    rgb:string
+    color:Color
+    accessible:Color
 }
 
-const toRGB = (rgb:{r:number,g:number,b:number}) => `rgb(${rgb.r},${rgb.g},${rgb.b})`
-
-export const useAverageColor = (image:HTMLImageElement|null|undefined,callback:(rgb:IAverageColor)=>void) => {
+export const useAverageColor = (
+        image:HTMLImageElement|undefined,
+        callback:(rgb:IAverageColor)=>void,
+        defaultRGB:Color=Color.rgb(0,0,0),
+        defaultOnRGB:Color = Color.rgb(255,255,255)
+    ) => {
     const blockSize:number = 5
-    const defaultRGB = {r:0,g:0,b:0}
     const canvas:HTMLCanvasElement = document.createElement('canvas')
     const context:CanvasRenderingContext2D|null = canvas.getContext && canvas.getContext('2d',{willReadFrequently:true})
     const rgb = {r:0,g:0,b:0}
     let data:ImageData, width:number, height:number, length:number
     if(image){
+        image.crossOrigin = 'Anonymous'
+        callback({color:defaultRGB,accessible:defaultOnRGB})
         image.onload = () => {
             let count = 0
             let i = -4
@@ -30,7 +35,7 @@ export const useAverageColor = (image:HTMLImageElement|null|undefined,callback:(
             try{
                 data = context.getImageData(0,0,width,height)
             } catch (e){
-                callback({...defaultRGB,rgb:toRGB(defaultRGB)})
+                callback({color:defaultRGB,accessible:defaultOnRGB})
             }
 
             length = data.data.length
@@ -46,8 +51,9 @@ export const useAverageColor = (image:HTMLImageElement|null|undefined,callback:(
             rgb.g = ~~(rgb.g/count)
             rgb.b = ~~(rgb.b/count)
 
-            callback({...rgb,rgb:toRGB(rgb)})
+            const color = Color.rgb(rgb.r,rgb.g,rgb.b)
+            callback({color:color,accessible:onColor(color)})
         }
-        image.onerror = () => callback({...defaultRGB,rgb:toRGB(defaultRGB)})
-    }else callback({...defaultRGB,rgb:toRGB(defaultRGB)})
+        image.onerror = () => callback({color:defaultRGB,accessible:defaultOnRGB})
+    }else callback({color:defaultRGB,accessible:defaultOnRGB})
 }
