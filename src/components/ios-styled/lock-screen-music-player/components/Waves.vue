@@ -10,7 +10,7 @@
 import { onBeforeUnmount, ref, watch } from 'vue';
 
 const waves = ref<number[]>([0,0,0,0,0,0])
-const interval = ref<number>()
+const interval = ref<NodeJS.Timeout>()
 const factor = ref<number>(1)
 
 const props = defineProps<{

@@ -55,14 +55,14 @@ const audio = ref(new Audio(props.sound))
 const playing = ref<boolean>(false)
 const totalDuration = ref<number>(0)
 const currentTime = ref<number>(0)
-const coverImageElement = ref<HTMLImageElement|null>() 
+const coverImageElement = ref<HTMLImageElement|undefined>() 
 const coverColor = ref<string|null>(null)
 const bigCover = ref<boolean>(false)
 
 onMounted(()=>{
     configureAudio()
     useAverageColor(coverImageElement.value,(rgb)=>{
-        coverColor.value = rgb.rgb
+        coverColor.value = rgb.color?.string() || null
     })
 })
 

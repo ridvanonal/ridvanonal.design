@@ -1,0 +1,86 @@
+@use "sass:math";
+
+$cover-colored-music-player-max-width:320px;
+$cover-colored-music-player-min-width:320px;
+$cover-colored-music-player-padding:0.5rem;
+$cover-colored-music-player-border-radius:1rem;
+$cover-colored-music-player-font-size:1rem;
+$cover-colored-music-player-cover-border-width:1px;
+$cover-colored-music-player-wave-size:2px;
+$cover-colored-music-player-wave-gap:0.125rem;
+
+.cover-colored-music-player{
+    width: 100%;
+    max-width: $cover-colored-music-player-max-width;
+    min-width: $cover-colored-music-player-min-width;
+    padding: $cover-colored-music-player-padding;
+    border-radius: $cover-colored-music-player-border-radius;
+    transition: background-color .2s ease, color .2s ease;
+    background-color: rgb(var(--color,var(--surface)));
+    display: flex;
+    color: rgb(var(--accessible,var(--on-surface)));
+
+    & > .cover{
+        height: 100%;
+        width: 100%;
+        position: relative;
+        border-radius: $cover-colored-music-player-border-radius - $cover-colored-music-player-padding;
+        max-width: math.round(math.div($cover-colored-music-player-max-width,3.5));
+        min-width: math.round(math.div($cover-colored-music-player-min-width,3.5));
+        max-height: math.round(math.div($cover-colored-music-player-max-width,3.5));
+        min-height: math.round(math.div($cover-colored-music-player-min-width,3.5));
+        background-color: rgb(var(--color,var(--gray-5)));
+        box-shadow: 0px 3px 15px -5px rgb(var(--color-darken,var(--gray-1)));
+        margin-right: $cover-colored-music-player-padding;
+        border: $cover-colored-music-player-cover-border-width solid rgba(var(--accessible,var(--on-surface)),0.125);
+        
+
+        & > img {
+            width: 100%;
+            object-fit: cover;
+            border-radius: calc($cover-colored-music-player-border-radius - $cover-colored-music-player-padding - $cover-colored-music-player-cover-border-width);
+        }
+
+        .waves{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap:$cover-colored-music-player-wave-gap;
+            position: absolute;
+            aspect-ratio: 1;
+            width: 25%;
+            border-radius: 100%;
+            z-index: 2;
+            background-color: rgb(var(--color-darken,var(--on-surface)));
+            bottom: 5px;
+            right: 5px;
+            box-shadow: 0px 0px 10px -2px rgb(var(--color-darken,var(--gray-1)));
+
+
+    
+            .wave{
+                min-height: $cover-colored-music-player-wave-size;
+                height: var(--amount,$cover-colored-music-player-wave-size);
+                width: $cover-colored-music-player-wave-size;
+                border-radius: $cover-colored-music-player-wave-size;
+                background-color: rgb(var(--accessible-lighten,var(--on-surface)));
+                transition: height .2s ease-in-out;
+            }
+        }
+    }
+
+    & > .detail-and-controls{
+        & > .detail {
+            padding: math.div($cover-colored-music-player-padding,2) 0;
+            & > .title {
+                color: rgb(var(--accessible,var(--on-surface)));
+                font-weight: bold;
+                margin-bottom: math.div($cover-colored-music-player-padding,4);
+            }
+            & > .singer{
+                font-size: $cover-colored-music-player-font-size * 0.875;
+                color: rgba(var(--accessible,var(--on-surface)),0.5);
+            }
+        }
+    }
+}

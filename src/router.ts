@@ -39,7 +39,17 @@ export const router = createRouter({
             meta:{
                 saveAsClass:'lock-screen-music-player',
                 backgroundClass:['ios-17'],
-                index:2,
+                index:3,
+                palette:'ios'
+            }
+        },
+        {
+            name:'Cover Colored Music Player',
+            path:'/original/cover-colored-music-player',
+            component:()=>import('./views/original/CoverColoredMusicPlayerView.vue'),
+            meta:{
+                saveAsClass:'cover-colored-music-player',
+                index:4,
                 palette:'ios'
             }
         },
@@ -49,7 +59,7 @@ export const router = createRouter({
             component:()=>import('./views/TestView.vue'),
             meta:{
                 saveAsClass:'keyboard',
-                index:3,
+                index:5,
                 palette:'ios'
             }
         },

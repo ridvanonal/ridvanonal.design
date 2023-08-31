@@ -2,15 +2,15 @@ import Color from "color";
 import { onColor } from "./use-color";
 
 export interface IAverageColor{
-    color:Color
-    accessible:Color
+    color:Color|null
+    accessible:Color|null
 }
 
 export const useAverageColor = (
         image:HTMLImageElement|undefined,
         callback:(rgb:IAverageColor)=>void,
-        defaultRGB:Color=Color.rgb(0,0,0),
-        defaultOnRGB:Color = Color.rgb(255,255,255)
+        defaultRGB?:Color,
+        defaultOnRGB?:Color
     ) => {
     const blockSize:number = 5
     const canvas:HTMLCanvasElement = document.createElement('canvas')
@@ -19,7 +19,7 @@ export const useAverageColor = (
     let data:ImageData, width:number, height:number, length:number
     if(image){
         image.crossOrigin = 'Anonymous'
-        callback({color:defaultRGB,accessible:defaultOnRGB})
+        callback({color:defaultRGB || null,accessible:defaultOnRGB || null})
         image.onload = () => {
             let count = 0
             let i = -4
@@ -35,7 +35,7 @@ export const useAverageColor = (
             try{
                 data = context.getImageData(0,0,width,height)
             } catch (e){
-                callback({color:defaultRGB,accessible:defaultOnRGB})
+                callback({color:defaultRGB || null,accessible:defaultOnRGB || null})
             }
 
             length = data.data.length
@@ -54,6 +54,6 @@ export const useAverageColor = (
             const color = Color.rgb(rgb.r,rgb.g,rgb.b)
             callback({color:color,accessible:onColor(color)})
         }
-        image.onerror = () => callback({color:defaultRGB,accessible:defaultOnRGB})
-    }else callback({color:defaultRGB,accessible:defaultOnRGB})
+        image.onerror = () => callback({color:defaultRGB || null,accessible:defaultOnRGB || null})
+    }else callback({color:defaultRGB || null,accessible:defaultOnRGB || null})
 }
