@@ -41,7 +41,7 @@ export const router = createRouter({
             component:()=>import('./views/ios-styled/LockScreenMusicPlayerView.vue'),
             meta:{
                 saveAsClass:'lock-screen-music-player',
-                backgroundClass:['ios-17'],
+                backgroundClass:['ios-17','ratio-9-16'],
                 index:3,
                 palette:'ios',
                 prefix:'ios'
@@ -61,7 +61,7 @@ export const router = createRouter({
         {
             name:'Test',
             path:'/test',
-            component:()=>import('./views/TestView.vue'),
+            component:()=>import('./views/test/TestView.vue'),
             meta:{
                 saveAsClass:'keyboard',
                 index:5,
