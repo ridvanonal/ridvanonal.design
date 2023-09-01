@@ -9,7 +9,8 @@ export const router = createRouter({
             component:()=>import('./views/HomeView.vue'),
             meta:{
                 index:0,
-                palette:'ios'
+                palette:'ios',
+                prefix:'ios'
             }
         },
         {
@@ -19,7 +20,8 @@ export const router = createRouter({
             meta:{
                 saveAsClass:'storage-box',
                 index:1,
-                palette:'ios'
+                palette:'ios',
+                prefix:'ios'
             }
         },
         {
@@ -29,7 +31,8 @@ export const router = createRouter({
             meta:{
                 saveAsClass:'keyboard',
                 index:2,
-                palette:'ios'
+                palette:'ios',
+                prefix:'ios'
             }
         },
         {
@@ -40,7 +43,8 @@ export const router = createRouter({
                 saveAsClass:'lock-screen-music-player',
                 backgroundClass:['ios-17'],
                 index:3,
-                palette:'ios'
+                palette:'ios',
+                prefix:'ios'
             }
         },
         {
@@ -50,7 +54,8 @@ export const router = createRouter({
             meta:{
                 saveAsClass:'cover-colored-music-player',
                 index:4,
-                palette:'ios'
+                palette:'ios',
+                prefix:'original'
             }
         },
         {
@@ -60,7 +65,8 @@ export const router = createRouter({
             meta:{
                 saveAsClass:'keyboard',
                 index:5,
-                palette:'ios'
+                palette:'ios',
+                prefix:'ios'
             }
         },
     ]

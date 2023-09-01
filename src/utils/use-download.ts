@@ -10,14 +10,14 @@ export const useRouteDownload = (route:RouteLocationNormalizedLoaded,scale:numbe
             html2canvas(el as HTMLElement,{scale,backgroundColor:null}).then(canvas=>{
                 let anchor = document.createElement("a")
                 anchor.href = canvas.toDataURL()
-                anchor.download = ["ios-styled",saveAsClass,useLayoutStore().theme].join('-')
+                anchor.download = [route.meta.prefix,saveAsClass,useLayoutStore().theme].join('-')
                 anchor.click()
             })
         })
     }
 }
 
-export const useDownload = (selector:string,scale:number = 20) => {
+export const useDownload = (selector:string,scale:number = 20,prefix:string) => {
     document.querySelectorAll(selector).forEach(el=>{
         html2canvas(el as HTMLElement,{scale,backgroundColor:null}).then(canvas=>{
             let anchor = document.createElement("a")

@@ -8,6 +8,10 @@ $cover-colored-music-player-font-size:1rem;
 $cover-colored-music-player-cover-border-width:1px;
 $cover-colored-music-player-wave-size:2px;
 $cover-colored-music-player-wave-gap:0.125rem;
+$cover-colored-music-player-progress-height: 0.375rem;
+$cover-colored-music-player-progress-hover-hight: 0.675rem;
+$cover-colored-music-player-buttons-padding-y:0.5rem;
+
 
 .cover-colored-music-player{
     width: 100%;
@@ -25,10 +29,10 @@ $cover-colored-music-player-wave-gap:0.125rem;
         width: 100%;
         position: relative;
         border-radius: $cover-colored-music-player-border-radius - $cover-colored-music-player-padding;
-        max-width: math.round(math.div($cover-colored-music-player-max-width,3.5));
-        min-width: math.round(math.div($cover-colored-music-player-min-width,3.5));
-        max-height: math.round(math.div($cover-colored-music-player-max-width,3.5));
-        min-height: math.round(math.div($cover-colored-music-player-min-width,3.5));
+        max-width: math.round(math.div($cover-colored-music-player-max-width,3.375));
+        min-width: math.round(math.div($cover-colored-music-player-min-width,3.375));
+        max-height: math.round(math.div($cover-colored-music-player-max-width,3.375));
+        min-height: math.round(math.div($cover-colored-music-player-min-width,3.375));
         background-color: rgb(var(--color,var(--gray-5)));
         box-shadow: 0px 3px 15px -5px rgb(var(--color-darken,var(--gray-1)));
         margin-right: $cover-colored-music-player-padding;
@@ -36,6 +40,7 @@ $cover-colored-music-player-wave-gap:0.125rem;
         
 
         & > img {
+            aspect-ratio: 1;
             width: 100%;
             object-fit: cover;
             border-radius: calc($cover-colored-music-player-border-radius - $cover-colored-music-player-padding - $cover-colored-music-player-cover-border-width);
@@ -70,6 +75,10 @@ $cover-colored-music-player-wave-gap:0.125rem;
     }
 
     & > .detail-and-controls{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
         & > .detail {
             padding: math.div($cover-colored-music-player-padding,2) 0;
             & > .title {
@@ -78,9 +87,126 @@ $cover-colored-music-player-wave-gap:0.125rem;
                 margin-bottom: math.div($cover-colored-music-player-padding,4);
             }
             & > .singer{
-                font-size: $cover-colored-music-player-font-size * 0.875;
+                font-size: $cover-colored-music-player-font-size * 0.8;
                 color: rgba(var(--accessible,var(--on-surface)),0.5);
             }
         }
+
+        & > .controls{
+            display: contents;
+
+            & > .time-zone{
+                display: flex;
+                align-items: center;
+
+                & span{
+                    color: rgba(var(--accessible,var(--on-surface)),0.75);
+                    text-align: center;
+                    display: block;
+                    min-width: 2rem;
+                    font-weight: 700;
+                    font-size: $cover-colored-music-player-font-size * .675;
+                }
+
+                & > .progress-wrapper{
+                    height: $cover-colored-music-player-progress-hover-hight;
+                    min-height: $cover-colored-music-player-progress-hover-hight;
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    margin: 0 math.div($cover-colored-music-player-padding,4);
+    
+                    &:hover,
+                    &:active{
+                        & > .progress {
+                            height: $cover-colored-music-player-progress-hover-hight;
+                        }
+                    }
+    
+                    & > .progress {
+                        position: relative;
+                        width: 100%;
+                        background-color:rgb(var(--accessible,var(--on-surface)),0.25);
+                        height: $cover-colored-music-player-progress-height;
+                        border-radius: $cover-colored-music-player-progress-height;
+                        overflow: hidden;
+                        transition: height 100ms ease-in-out;
+            
+                        & > input{
+                            position: absolute;
+                            z-index: 2;
+                            left: 0;
+                            top: 0;
+                            width: 100%;
+                            appearance: none;
+                            margin-left: 0;
+                            margin-top: 0;
+                            height: 100%;
+                            opacity: 0;
+                            padding: 0;
+                            margin: 0;
+                        }
+            
+                        &::after{
+                            content: "";
+                            width: var(--percent);
+                            height: 100%;
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                            background-color: rgb(var(--accessible,var(--on-surface)),0.5);
+                        }
+                    }
+                }
+
+            }
+
+            
+
+            & > .buttons {
+                display: flex;
+                height: 100%;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 $cover-colored-music-player-buttons-padding-y;
+
+                .button {
+                    width: 15%;
+
+                    &.small{
+                        width: 10%;
+                    }
+
+                    &:active{
+                        & > svg{
+                            color: rgba(var(--accessible,var(--on-surface)),0.5);    
+                        }
+                    }
+
+                    & > svg{
+                        color: rgba(var(--accessible,var(--on-surface)),0.875);    
+                        position: relative;
+                        display: block;
+                        transition: scale .1s ease, opacity .1s ease,color .2s linear;
+    
+                        & > path{
+                            fill: currentColor;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    .play-pause-enter-active,
+    .play-pause-leave-active {
+        transition: scale .1s ease, opacity .1s ease;
+    }
+
+    .play-pause-enter-from,
+    .play-pause-leave-to {
+        scale: 0.5;
+        opacity: 0;
     }
 }

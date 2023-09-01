@@ -116,6 +116,8 @@ $lock-screen-music-player-wrapper-padding-y:5%;
                 margin-right: $lock-screen-music-player-padding;
     
                 & > img {
+                    aspect-ratio: 1;
+                    object-fit: cover;
                     width: 100%;
                 }
     
