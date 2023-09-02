@@ -17,7 +17,3 @@ const datas = ref<IStorageBoxCategory[]>([
 	{name:"X",value:0.375,color:'green'},
 ])
 </script>
-
-<style scoped>
-
-</style>

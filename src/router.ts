@@ -10,7 +10,7 @@ export const router = createRouter({
             meta:{
                 index:0,
                 palette:'ios',
-                prefix:'ios'
+                prefix:'ios-styled'
             }
         },
         {
@@ -21,7 +21,7 @@ export const router = createRouter({
                 saveAsClass:'storage-box',
                 index:1,
                 palette:'ios',
-                prefix:'ios'
+                prefix:'ios-styled'
             }
         },
         {
@@ -32,7 +32,7 @@ export const router = createRouter({
                 saveAsClass:'keyboard',
                 index:2,
                 palette:'ios',
-                prefix:'ios'
+                prefix:'ios-styled'
             }
         },
         {
@@ -44,7 +44,7 @@ export const router = createRouter({
                 backgroundClass:['ios-17','ratio-9-16'],
                 index:3,
                 palette:'ios',
-                prefix:'ios'
+                prefix:'ios-styled'
             }
         },
         {
@@ -64,9 +64,9 @@ export const router = createRouter({
             component:()=>import('./views/test/TestView.vue'),
             meta:{
                 saveAsClass:'keyboard',
-                index:5,
+                index:6,
                 palette:'ios',
-                prefix:'ios'
+                prefix:'ios-styled'
             }
         },
     ]
