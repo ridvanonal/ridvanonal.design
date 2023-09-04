@@ -1,0 +1,90 @@
+.battery-indicator{
+    svg {
+        display: block;
+    }
+    .rect-0,
+    .circle-0{
+        transition: fill .2s linear;
+        fill:rgba(var(--white),0.35);
+    }
+
+    .rect-1{
+        transition: width .2s ease-in-out, fill .2s linear;
+        fill: rgb(var(--white));
+    }
+
+    .text-0{
+        fill: black;
+        font-size: 22px;
+        font-weight: bolder;
+        font-family: 'Inter';
+    }
+
+    .text-1{
+        fill: transparent;
+        font-weight: bolder;
+        font-family: 'Inter';
+        letter-spacing: -0.5;
+    }
+
+
+    .bolt{
+        fill: transparent;
+    }
+
+    &.full {
+        .circle-0{
+            fill: rgb(var(--white));
+        }
+    }
+
+    &.dark{
+        .rect-0,
+        .circle-0{
+            fill:rgba(var(--black),0.35)
+        }
+        &.full {
+            .circle-0{
+                fill: rgb(var(--black));
+            }
+        }
+        .rect-1{
+            fill:rgba(var(--black))
+        }
+    }
+
+    &.charging{
+        .rect-1{
+            fill:rgb(var(--green))
+        }
+        .text-0{
+            fill: white;
+        }
+        .text-1{
+            fill: white;
+        }
+        .bolt{
+            fill: rgb(var(--white));
+        }
+        &.full {
+            .circle-0{
+                fill: rgb(var(--green));
+            }
+        }
+    }
+
+    &:not(.charging).low-power-mode{
+        .rect-1{
+            fill:rgb(var(--yellow))
+        }
+        &.full .circle-0{
+            fill: rgb(var(--yellow));
+        }
+    }
+
+    &:not(.charging):not(.low-power-mode).low-power{
+        .rect-1{
+            fill:rgb(var(--red))
+        }
+    }
+}

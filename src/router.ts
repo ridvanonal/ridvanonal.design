@@ -59,11 +59,23 @@ export const router = createRouter({
             }
         },
         {
+            name:'iOS Styled Battery Indicator',
+            path:'/ios-styled/battery-indicator',
+            component:()=>import('./views/ios-styled/BatteryIndicatorView.vue'),
+            meta:{
+                saveAsClass:'battery-indicator',
+                index:5,
+                backgroundClass:['ios-17'],
+                palette:'ios',
+                prefix:'ios-styled'
+            }
+        },
+        {
             name:'Test',
             path:'/test',
             component:()=>import('./views/test/TestView.vue'),
             meta:{
-                saveAsClass:'keyboard',
+                saveAsClass:'test',
                 index:6,
                 palette:'ios',
                 prefix:'ios-styled'

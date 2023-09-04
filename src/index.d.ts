@@ -5,6 +5,6 @@ declare module 'vue-router' {
         palette:'ios'|'original'
         prefix:'ios-styled'|'original'
         saveAsClass?:string
-        backgroundClasses?:string[]
+        backgroundClass?:string[]
     }
 }
