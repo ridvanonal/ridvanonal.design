@@ -1,0 +1,195 @@
+@use "sass:math";
+@import "./src/assets/_palette.scss";
+
+$mix-color-1:map-get($colors,'black');
+$mix-color-1-dark:map-get($colors-dark,'white');
+
+$mix-color-2:map-get($colors, 'white');
+$mix-color-2-dark:map-get($colors-dark,'black');
+
+$yellow:map-get($colors,'yellow');
+$yellow-dark:map-get($colors,'yellow');
+
+$green:map-get($colors,'green');
+$green-dark:map-get($colors-dark,'green');
+
+$base-color:mix($mix-color-1,$mix-color-2,80%);
+$base-color-dark:mix($mix-color-1-dark,$mix-color-2-dark,30%);
+
+$compass-out-circle-color: lighten($base-color,15%);
+$compass-out-circle-color-dark: lighten($base-color-dark,15%);
+$compass-center-color: darken($base-color,15%);
+$compass-center-color-dark: darken($base-color-dark,15%);
+$compass-direction-color: $base-color;
+$compass-direction-color-dark: $base-color-dark;
+$compass-top-indicator-color:lighten($yellow,5%);
+$compass-top-indicator-color-dark:lighten($yellow-dark,5%);
+
+$compass-size:200px;
+$compass-out-circle-size:math.round(math.div($compass-size,10));
+
+.compass{
+    --compass-out-circle-color:#{$compass-out-circle-color};
+    --compass-center-color:#{$compass-center-color};
+    --compass-direction-color:#{$compass-direction-color};
+    --compass-top-indicator-color:#{$compass-top-indicator-color};
+    --compass-direction-text-color:#{$green};
+    [data-theme="dark"] & {
+        --compass-out-circle-color:#{$compass-out-circle-color-dark};
+        --compass-center-color:#{$compass-center-color-dark};
+        --compass-direction-color:#{$compass-direction-color-dark};
+        --compass-top-indicator-color:#{$compass-top-indicator-color-dark};
+        --compass-direction-text-color:#{$green-dark};
+    }
+
+    height: $compass-size;
+    width: $compass-size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    
+    & > .degrees{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        border-radius: 100%;
+        border:$compass-out-circle-size solid var(--compass-out-circle-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotateZ(var(--compass-degree));
+
+        & > .degree{
+            transform-origin: 50% 50%;
+            height: calc(100% + 2 * $compass-out-circle-size);
+            position: absolute;
+            transform: rotateZ(var(--degree));
+            display: flex;
+            justify-content: center;
+
+            &::after{
+                font-size: math.round($compass-out-circle-size * .6);
+                font-weight: bold;
+                content: attr(data-degree);
+                display: flex;
+                align-items: center;
+                height: $compass-out-circle-size;
+                line-height: $compass-out-circle-size;
+                position: absolute;
+                color: rgba(var(--white),0.75);
+            }
+
+            &.semi:after{
+                $indicator-height:math.round($compass-out-circle-size * .3);
+                $indicator-top: math.div($compass-out-circle-size - $indicator-height,2);
+                $indicator-width: math.round(math.div($compass-out-circle-size,10));
+                content: "";
+                top: $indicator-top;
+                height: $indicator-height;
+                width: $indicator-width;
+                border-radius: $indicator-width;
+                background-color: rgba(var(--white),0.5);
+            }
+        }
+    }
+
+    & > .directions{
+        border-radius: 100%;
+        position: absolute;
+        border:$compass-out-circle-size solid var(--compass-direction-color);
+        height: calc(95% - 2 * $compass-out-circle-size);
+        width: calc(95% - 2 * $compass-out-circle-size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: rotateZ(var(--compass-degree));
+
+        & > .direction{
+            z-index: 39;
+            position: absolute;
+            height: calc(100% + 2 * $compass-out-circle-size);
+            display: flex;
+            justify-content: center;
+            transform: rotateZ(calc(var(--degree)));
+
+            &::after{
+                font-size: math.round($compass-out-circle-size * .7);
+                font-weight: 700;
+                content: attr(data-direction);
+                transform: rotateZ(calc(-1 * var(--degree)));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: $compass-out-circle-size;
+                width: $compass-out-circle-size;
+                line-height: $compass-out-circle-size;
+                position: absolute;
+                color: var(--compass-direction-text-color);
+            }
+        }
+
+        & > .top-indicator,
+        & > .bottom-indicator{
+            position: absolute;
+            height: calc(100% + 2 * $compass-out-circle-size);
+            display: flex;
+            justify-content: center;
+            z-index: 40;
+            transform: rotateZ(calc(-1 * var(--compass-degree)));
+        
+            &::after{
+                $indicator-height: $compass-out-circle-size * 0.875 ;
+                $indicator-top: math.div($indicator-height - $compass-out-circle-size,-2);
+                $indicator-width: math.round(math.div($compass-out-circle-size,6));
+                content: "";
+                top: $indicator-top;
+                position: absolute;
+                height: $indicator-height;
+                width: calc($indicator-width + 1px);
+                border-radius: $indicator-width;
+                border: 1px solid var(--compass-center-color);
+            }
+        }
+
+        & > .top-indicator{
+            transform: rotateZ(calc(-1 * var(--compass-degree)));
+            &::after{
+                background-color: var(--compass-top-indicator-color);
+                
+            }
+        }
+
+        & > .bottom-indicator{
+            &::after{
+                background-color: rgba(var(--white),0.75);
+                backdrop-filter: blur(1rem);
+            }
+            transform: rotateZ(calc(180deg - var(--compass-degree)));
+        }
+    }
+
+    & > .center{
+        position: absolute;
+        background-color: var(--compass-center-color);
+        height: calc(92.5% - 4*$compass-out-circle-size);
+        width: calc(92.5% - 4*$compass-out-circle-size);
+        border-radius: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        font-weight: bold;
+        color: rgb(var(--white));
+
+        & > .current-degree{
+            font-size: math.round( $compass-out-circle-size * 1.5);
+        }
+
+        & > .current-direction{
+            font-weight: 600;
+            font-size: math.round( $compass-out-circle-size * 0.75);
+            color: rgba(var(--white),0.75);
+        }
+    }
+}

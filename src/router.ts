@@ -71,12 +71,23 @@ export const router = createRouter({
             }
         },
         {
+            name:'Compass',
+            path:'/original/compass',
+            component:()=>import('./views/original/CompassView.vue'),
+            meta:{
+                saveAsClass:'compass',
+                index:6,
+                palette:'ios',
+                prefix:'original'
+            }
+        },
+        {
             name:'Test',
             path:'/test',
             component:()=>import('./views/test/TestView.vue'),
             meta:{
                 saveAsClass:'test',
-                index:6,
+                index:7,
                 palette:'ios',
                 prefix:'ios-styled'
             }

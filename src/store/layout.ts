@@ -5,9 +5,9 @@ export const useLayoutStore = defineStore('layout',()=>{
     const theme = ref<'dark'|'light'>('light')
     const toggleTheme = () => {
         theme.value == 'dark' ? theme.value = 'light' : theme.value = 'dark'
-        setTheme()
+        setTheme(theme.value)
     }
-    const setTheme = () => document.documentElement.dataset.theme = theme.value
+    const setTheme = (theme:'dark'|'light') => document.documentElement.dataset.theme = theme
 
     const backgroundClass = ref<string|null>(null)
     const setBackgroundClass = (cls:string|null) =>  backgroundClass.value = cls
