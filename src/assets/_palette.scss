@@ -1,3 +1,54 @@
+$material-colors:(
+    'black':rgb(0,0,0),
+    'white': rgb(255,255,255),
+    'bg': rgb(242,242,247),
+    'surface':rgb(255,255,255),
+    'on-surface':rgb(0,0,0),
+    'red':rgb(244, 64, 52),
+    'orange':rgb(255, 152, 0),
+    'yellow':rgb(255, 235, 59),
+    'green':rgb(76, 175, 80),
+    'mint':rgb(0, 199, 190),
+    'teal':rgb(0, 150, 136),
+    'cyan':rgb(0, 188, 212),
+    'blue':rgb(33, 150, 243),
+    'indigo':rgb(63, 81, 181),
+    'purple':rgb(156, 39, 176),
+    'pink':rgb(233, 30, 99),
+    'brown':rgb(121, 85, 72),
+    'gray-1':rgb(142,142,142),
+    'gray-2':rgb(174,174,174),
+    'gray-3':rgb(199,199,199),
+    'gray-4':rgb(209,209,209),
+    'gray-5':rgb(229,229,229),
+    'gray-6':rgb(242,242,242),
+    'dark-gray':rgb(28,28,28)
+);
+
+$material-colors-dark:(
+    'bg':rgb(0,0,0),
+    'surface':rgb(28,28,28),
+    'on-surface':rgb(255,255,255),
+    'red':rgb(244, 64, 52),
+    'orange':rgb(255, 152, 0),
+    'yellow':rgb(255, 235, 59),
+    'green':rgb(76, 175, 80),
+    'mint':rgb(0, 199, 190),
+    'teal':rgb(0, 150, 136),
+    'cyan':rgb(0, 188, 212),
+    'blue':rgb(33, 150, 243),
+    'indigo':rgb(63, 81, 181),
+    'purple':rgb(156, 39, 176),
+    'pink':rgb(233, 30, 99),
+    'brown':rgb(121, 85, 72),
+    'gray-1':rgb(142,142,142),
+    'gray-2':rgb(99,99,99),
+    'gray-3':rgb(72,72,72),
+    'gray-4':rgb(58,58,58),
+    'gray-5':rgb(44,44,44),
+    'gray-6':rgb(28,28,28)
+);
+
 $colors:(
     'black':rgb(0,0,0),
     'white': rgb(255,255,255),
@@ -21,12 +72,11 @@ $colors:(
     'gray-3':rgb(199,199,204),
     'gray-4':rgb(209,209,214),
     'gray-5':rgb(229,229,234),
-    'gray-6':rgb(242,242,247)
+    'gray-6':rgb(242,242,247),
+    'dark-gray':rgb(28,28,30),
 );
 
 $colors-dark:(
-    'black':rgb(0,0,0),
-    'white': rgb(255,255,255),
     'bg':rgb(0,0,0),
     'surface':rgb(28,28,30),
     'on-surface':rgb(255,255,255),
@@ -47,18 +97,30 @@ $colors-dark:(
     'gray-3':rgb(72,72,74),
     'gray-4':rgb(58,58,60),
     'gray-5':rgb(44,44,46),
-    'gray-6':rgb(28,28,30)
+    'gray-6':rgb(28,28,30),
 );
 
 
-html[data-palette="ios"] {
-    @each $name,$color in $colors{
-        --#{$name}:#{unquote("#{red($color)}, #{green($color)}, #{blue($color)}")};
+html[data-palette='material']{
+    @each $name,$color in $material-colors{
+        --#{$name}:#{unquote('#{red($color)}, #{green($color)}, #{blue($color)}')};
     }
 
-    &[data-theme="dark"] {
+    &[data-theme='dark'] {
+        @each $name,$color in $material-colors-dark{
+            --#{$name}:#{unquote('#{red($color)}, #{green($color)}, #{blue($color)}')};
+        }
+    }
+}
+
+html[data-palette='ios'] {
+    @each $name,$color in $colors{
+        --#{$name}:#{unquote('#{red($color)}, #{green($color)}, #{blue($color)}')};
+    }
+
+    &[data-theme='dark'] {
         @each $name,$color in $colors-dark{
-            --#{$name}:#{unquote("#{red($color)}, #{green($color)}, #{blue($color)}")};
+            --#{$name}:#{unquote('#{red($color)}, #{green($color)}, #{blue($color)}')};
         }
     }
 }

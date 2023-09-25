@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { onBeforeUnmount, ref, watch } from 'vue'
+import { useRandomMinMax } from '../../../../utils/use-random'
 
 const props = defineProps<{
     playing:boolean
@@ -18,7 +19,7 @@ onBeforeUnmount(()=>clearInterval(interval.value))
 const start = () => {
     interval.value = setInterval(()=>{
         waves.value = waves.value.map(()=>{
-            return getRandomInt(0,12)
+            return useRandomMinMax(0,12)
         })
     },150)
 }
@@ -31,10 +32,6 @@ watch(()=>props.playing,()=>{
         waves.value = [0,0,0]
     }
 })
-
-const getRandomInt = (min:number, max:number) => {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
 
 const interval = ref<NodeJS.Timeout>()
 

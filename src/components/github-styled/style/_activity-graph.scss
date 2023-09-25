@@ -1,0 +1,38 @@
+$activity-graph-padding:0.25rem;
+$activity-graph-border-radius:0.5rem;
+$activity-graph-border-spacing:0.25rem;
+$activity-graph-cell-width:0.875rem;
+
+.activity-graph{
+    padding: $activity-graph-padding;
+    border-radius: $activity-graph-border-radius;
+    background-color: rgb(var(--surface));
+
+    & > table{
+        border-spacing: $activity-graph-border-spacing;
+    }
+
+    .cell{
+        border-radius: $activity-graph-border-radius - $activity-graph-padding;
+        padding: 0;
+
+        & > .spacer {
+            min-width: $activity-graph-cell-width;
+            aspect-ratio: 1;
+        }
+    }
+
+    .cell:not(.none){
+        background-color: rgb(var(--on-surface),0.05);
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgb(var(--on-surface),0.05);
+    }
+
+    .cell:not(.empty):not(.none){
+        background-color: rgba(var(--green),var(--o));
+        border-width: 1px;
+        border-style: solid;
+        border-color: rgba(var(--green),calc(var(--o) + 0.1));
+    }
+}

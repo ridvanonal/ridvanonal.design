@@ -36,24 +36,12 @@ export const router = createRouter({
             }
         },
         {
-            name:'iOS Styled Lock Screen Music Player',
-            path:'/ios-styled/lock-screen-music-player',
-            component:()=>import('./views/ios-styled/LockScreenMusicPlayerView.vue'),
-            meta:{
-                saveAsClass:'lock-screen-music-player',
-                backgroundClass:['ios-17','ratio-9-16'],
-                index:3,
-                palette:'ios',
-                prefix:'ios-styled'
-            }
-        },
-        {
             name:'Cover Colored Music Player',
             path:'/original/cover-colored-music-player',
             component:()=>import('./views/original/CoverColoredMusicPlayerView.vue'),
             meta:{
                 saveAsClass:'cover-colored-music-player',
-                index:4,
+                index:3,
                 palette:'ios',
                 prefix:'original'
             }
@@ -64,7 +52,7 @@ export const router = createRouter({
             component:()=>import('./views/ios-styled/BatteryIndicatorView.vue'),
             meta:{
                 saveAsClass:'battery-indicator',
-                index:5,
+                index:4,
                 backgroundClass:['ios-17'],
                 palette:'ios',
                 prefix:'ios-styled'
@@ -76,9 +64,20 @@ export const router = createRouter({
             component:()=>import('./views/original/CompassView.vue'),
             meta:{
                 saveAsClass:'compass',
-                index:6,
+                index:5,
                 palette:'ios',
                 prefix:'original'
+            }
+        },
+        {
+            name:'Activity Graph',
+            path:'/github-styled/activity-graph',
+            component:()=>import('./views/github-styled/ActivityGraphView.vue'),
+            meta:{
+                saveAsClass:'activity-graph',
+                index:6,
+                palette:'ios',
+                prefix:'github-styled'
             }
         },
         {
